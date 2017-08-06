@@ -2,6 +2,10 @@
 
 Gem built for simple rapid exploit development using ruby. Currently supportes tools taken form the metasploit framework tools folder.
 
+Tutorials being used for development
+* [FuzzySecurity](http://fuzzysecurity.com)
+* [Corelan.be](https://www.corelan.be/)
+
 
 ## Installation
 
