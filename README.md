@@ -1,6 +1,6 @@
 # Reaper
 
-This gem was built for simple rapid exploit development using ruby. Still in Beta current supportes tools taken form the metasploit framework tools folder.
+Gem built for simple rapid exploit development using ruby. Currently supportes tools taken form the metasploit framework tools folder.
 
 
 ## Installation
