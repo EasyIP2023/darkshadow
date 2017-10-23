@@ -2,6 +2,7 @@ require "reaper/version"
 
 # Set command names
 HELP = "help"
+HELP_TAC = "-h"
 GENERATE = "gen"
 PATTERN_CREATE = "pate"
 PATTERN_OFFSET = "poset"
@@ -16,15 +17,16 @@ module Reaper
       require 'reaper/tools/exploit/pattern_create'
     elsif arg == PATTERN_OFFSET
       require 'reaper/tools/exploit/pattern_offset'
-    elsif arg == HELP
+    elsif arg == HELP || arg == HELP_TAC
       help_message
     else
-      puts 'No options selected, try: "reaper help" for usage'
+      puts '[x] No options selected, try: "reaper -h" for usage'
     end
   end
 
   def self.help_message
-    puts "Options
+    puts "Usage: reaper [options]\nExample: reaper pate -l 600"
+    puts "\nOptions:
       #{GENERATE} \t Exploit Code Generation
       #{PATTERN_CREATE} \t For Pattern Creating
       #{PATTERN_OFFSET} \t For Pattern Offsetting
