@@ -1,6 +1,6 @@
 # Reaper
 
-Gem built for simple rapid exploit development using ruby. Currently supportes tools taken from the metasploit framework tools folder.
+Gem built for simple rapid exploit development using ruby.
 
 Tutorials being used for development
 * [FuzzySecurity](http://fuzzysecurity.com)

@@ -24,4 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "bundler", "~> 1.15"
   spec.add_dependency "rake", "~> 12.0"
   spec.add_dependency "rex-text", '~> 0'
+  spec.add_dependency "celluloid", '~> 0'
+
 end

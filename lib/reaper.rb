@@ -1,26 +1,30 @@
 require "reaper/version"
 
 # Set command names
-HELP = "help"
-HELP_TAC = "-h"
-GENERATE = "gen"
+HELP           = "help"
+HELP_TAC       = "-h"
+GENERATE       = "gen"
 PATTERN_CREATE = "pate"
 PATTERN_OFFSET = "poset"
-
+PORT_SEARCH    = "scan"
 
 module Reaper
   def self.get_first_arg
-    arg = ARGV[0]
-    if arg == GENERATE
+    case ARGV[0]
+    when GENERATE
       require 'reaper/tools/exploit/generate'
-    elsif arg == PATTERN_CREATE
+    when PATTERN_CREATE
       require 'reaper/tools/exploit/pattern_create'
-    elsif arg == PATTERN_OFFSET
+    when PATTERN_OFFSET
       require 'reaper/tools/exploit/pattern_offset'
-    elsif arg == HELP || arg == HELP_TAC
+    when PORT_SEARCH
+      require 'reaper/tools/search/scan'
+    when HELP
+      help_message
+    when HELP_TAC
       help_message
     else
-      puts '[x] No options selected, try: "reaper -h" for usage'
+      puts '[x] No options selected, try: reaper -h for usage'
     end
   end
 
@@ -30,6 +34,7 @@ module Reaper
       #{GENERATE} \t Exploit Code Generation
       #{PATTERN_CREATE} \t For Pattern Creating
       #{PATTERN_OFFSET} \t For Pattern Offsetting
+      #{PORT_SEARCH} \t For Port Searching
       #{HELP} \t for this message here"
   end
 end
