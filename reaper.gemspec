@@ -25,5 +25,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rake", "~> 12.0"
   spec.add_dependency "rex-text", '~> 0'
   spec.add_dependency "celluloid", '~> 0'
-  spec.add_dependency "os", '~> 1.0.0'
 end

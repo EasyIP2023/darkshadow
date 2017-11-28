@@ -43,7 +43,6 @@ module Scan
       @open_ports.each do |op|
         puts "\t#{op}/tcp\topen\t#{@services.find_service_name(op)}"
       end
-      #puts OS.report
     end
   end
 
