@@ -26,10 +26,13 @@ module Scan
       end
     end
 
+    # Send UDP Packets. If an ICMP port unreachable and
+    # (type 3, code 3) is returned, the port is closed
     def udp_scan (port)
       begin
         sock = UDPSocket.new
-        @open_ports << port unless sock.send("", 0, @ip, port)
+        sock.send("", 0, @ip, port)
+        @open_ports << port unless recv(1024)
       rescue
         sock.close if sock != nil
       end
@@ -46,6 +49,8 @@ module Scan
       end
     end
 
+    # Send SYN flags until you get a SYN/ACK
+    # Send an ACK flag to complete TCP 3-Way Handshake
     def tcp_scan (port)
       begin
         sock = Socket.new(:INET, :STREAM, 0)
@@ -129,6 +134,8 @@ module Scan
 
     def run
       if @opts[:check_ip]
+        # Default to ports 1 - 1024 if ports not specified
+        @opts[:ports] = [1,1024] if @opts[:ports].nil?
         if @opts[:full_tcp]
           sp = Scanner.new @opts[:ip], @opts[:ports]
           sp.async.tcp_run
