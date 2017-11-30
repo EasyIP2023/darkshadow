@@ -16,11 +16,31 @@ module Scan
       @port_count = 1
     end
 
+    def udp_run
+      start_port = @ports[0].to_i
+      end_port   = @ports[1].to_i
+      @cp_count = end_port
+      until start_port == (end_port+1) do
+        udp_scan start_port
+        start_port += 1
+      end
+    end
+
+    def udp_scan (port)
+      begin
+        sock = UDPSocket.new
+        @open_ports << port unless sock.send("", 0, @ip, port)
+      rescue
+        sock.close if sock != nil
+      end
+    end
+
+
     def tcp_run
       start_port = @ports[0].to_i
       end_port   = @ports[1].to_i
       @cp_count = end_port
-      until start_port == end_port do
+      until start_port == (end_port+1) do
         tcp_scan start_port
         start_port += 1
       end
@@ -37,11 +57,17 @@ module Scan
     end
 
     def display
-      puts "Reaper Scan Report"
-      puts "Number of closed ports #{@cp_count-@open_ports.length}"
-      puts "\n\tPort\tSTATE\tService"
-      @open_ports.each do |op|
-        puts "\t#{op}/tcp\topen\t#{@services.find_service_name(op)}"
+      if @open_ports.empty?
+        puts "Reaper Scan Report"
+        puts "Number of closed ports #{@cp_count-@open_ports.length}"
+        $stderr.puts "[x] Sorry couldn't find a port :("
+      else
+        puts "Reaper Scan Report"
+        puts "Number of closed ports #{@cp_count-@open_ports.length}"
+        puts "\n\tPort\tSTATE\tService"
+        @open_ports.each do |op|
+          puts "\t#{op}/tcp\topen\t#{@services.find_service_name(op)}"
+        end
       end
     end
   end
@@ -50,7 +76,7 @@ module Scan
     def self.parse (args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "Usage: reaper gen [options]\nExample: reaper scan --ip 192.168.1.1 -p 1,10000"
+        opt.banner = "Usage: reaper gen [options]\nExample: reaper scan --ip 192.168.1.1 -p 1,10000 --full-tcp"
         opt.separator ''
         opt.separator 'Options:'
 
@@ -65,7 +91,12 @@ module Scan
           options[:full_tcp] = true
         end
 
-        opt.on('-p', '--ports 1,1000', Array, "Search for open ports") do |ports|
+        options[:udp] = false
+        opt.on('-u', '--udp', "udp scan") do |tcp|
+          options[:udp] = true
+        end
+
+        opt.on('-p', '--ports <ports>', Array, "enter port numbers") do |ports|
           options[:ports] = ports
           if ports.length > 2
             $stderr.puts "[x] Can't have for than two ports"
@@ -102,12 +133,16 @@ module Scan
           sp = Scanner.new @opts[:ip], @opts[:ports]
           sp.async.tcp_run
           sp.async.display
+        elsif @opts[:udp]
+          sp = Scanner.new @opts[:ip], @opts[:ports]
+          sp.async.udp_run
+          sp.async.display
         else
           $stderr.puts "[x] Need other options, ex. reaper scan --ip 192.168.1.1 -p 1,1000 --full-tcp"
           exit
         end
       else
-        $stderr.puts "[x] Missing Ip Address/Range"
+        $stderr.puts "[x] Missing Ip Address or ports missing"
         exit
       end
     end
