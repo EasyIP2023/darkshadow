@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "reaper"
   spec.version       = Reaper::VERSION
   spec.authors       = ["EasyIP2023"]
-  spec.email         = ["vdavis@siu.edu"]
+  spec.email         = ["vdavis2495@gmail.com"]
 
   spec.summary       = %q{This gem is built to help with rapid exploit development in ruby}
   spec.homepage      = "https://github.com/EasyIP2023/reaper"
