@@ -2,12 +2,11 @@
 
 ![darkshadow](https://i0.wp.com/www.gsalam.net/wp-content/uploads/2015/12/Protection-Against-Magic-and-Evil-1-GSalam.Net_.jpg?resize=777%2C437)
 
-Gem built for simple rapid exploit development using ruby.
+Gem built for simple rapid exploit development using ruby. The gem is meant for those who want to learn about security researching and those whom already are security researchers. To help learn and assist in the exploit development process.
 
 Tutorials being used for development
 * [FuzzySecurity](http://fuzzysecurity.com)
 * [Corelan.be](https://www.corelan.be/)
-
 
 ## Installation
 
