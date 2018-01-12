@@ -1,4 +1,6 @@
-# darkshadow
+# DarkShadow
+
+![darkshadow](https://i0.wp.com/www.gsalam.net/wp-content/uploads/2015/12/Protection-Against-Magic-and-Evil-1-GSalam.Net_.jpg?resize=777%2C437)
 
 Gem built for simple rapid exploit development using ruby.
 
