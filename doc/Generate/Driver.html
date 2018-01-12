@@ -94,7 +94,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/reaper/tools/exploit/generate.rb</dd>
+    <dd>lib/darkshadow/tools/exploit/generate.rb</dd>
   </dl>
   
 </div>
@@ -204,7 +204,7 @@
 64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/reaper/tools/exploit/generate.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/darkshadow/tools/exploit/generate.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='kw'>begin</span>
@@ -246,7 +246,7 @@
 68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/reaper/tools/exploit/generate.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/darkshadow/tools/exploit/generate.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span>
   <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@opts</span><span class='lbracket'>[</span><span class='symbol'>:filename</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>.rb</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>w+</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Options.html" title="Generate::Options (class)">Options</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_string'><span class='object_link'><a href="Options.html#get_string-class_method" title="Generate::Options.get_string (method)">get_string</a></span></span><span class='rparen'>)</span> <span class='rbrace'>}</span>

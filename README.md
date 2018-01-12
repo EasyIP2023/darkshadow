@@ -1,4 +1,4 @@
-# Reaper
+# darkshadow
 
 Gem built for simple rapid exploit development using ruby.
 
@@ -9,18 +9,10 @@ Tutorials being used for development
 
 ## Installation
 
-**Note:** Gem isn't official still in Beta install via locally
-```bash
-$ git clone https://github.com/EasyIP2023/reaper.git
-$ cd reaper/
-$ gem build reaper.gemspec
-$ gem install --local reaper-0.1.0.gem
-```
-
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'reaper'
+gem 'darkshadow'
 ```
 
 And then execute:
@@ -31,7 +23,7 @@ $ bundle
 Or install it yourself as:
 
 ```
-$ gem install reaper
+$ gem install darkshadow
 ```
 
 ## Usage
@@ -39,36 +31,36 @@ $ gem install reaper
 **Display all current supported tools**
 
 ```bash
-$ reaper help
+$ darkshadow help
 ```
 
 **Generate Template for Remote Exploits**
 
 ```bash
-$ reaper gen --remote-exploit <filename>
+$ darkshadow gen --remote-exploit <filename>
 ```
 
 **Generate Template for payloads**
 
 ```bash
-$ reaper gen --payload <filename>
+$ darkshadow gen --payload <filename>
 ```
 
 **Pattern Creating**
 
 ```bash
-$ reaper pate -l 600
+$ darkshadow pate -l 600
 ```
 
 **Pattern Offset**
 
 ```bash
-$ reaper poset -q Aa3A
+$ darkshadow poset -q Aa3A
 ```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/EasyIP2023/reaper.
+Bug reports and pull requests are welcome on GitHub at https://github.com/EasyIP2023/darkshadow.
 
 ## License
 

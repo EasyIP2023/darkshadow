@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-require 'reaper/tools/search/services_hash'
+require 'darkshadow/tools/search/services_hash'
 require 'celluloid/current'
 require 'socket'
 require 'optparse'
@@ -63,11 +63,11 @@ module Scan
 
     def display
       if @open_ports.empty?
-        puts "Reaper Scan Report"
+        puts "darkshadow Scan Report"
         puts "Number of closed ports #{@cp_count-@open_ports.length}"
         $stderr.puts "[x] Sorry couldn't find a port :("
       else
-        puts "Reaper Scan Report"
+        puts "darkshadow Scan Report"
         puts "Number of closed ports #{@cp_count-@open_ports.length}"
         puts "\n\tPort\tSTATE\tService"
         @open_ports.each do |op|
@@ -81,7 +81,7 @@ module Scan
     def self.parse (args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "Usage: reaper gen [options]\nExample: reaper scan --ip 192.168.1.1 -p 1,10000 --full-tcp"
+        opt.banner = "Usage: darkshadow gen [options]\nExample: darkshadow scan --ip 192.168.1.1 -p 1,10000 --full-tcp"
         opt.separator ''
         opt.separator 'Options:'
 
@@ -145,7 +145,7 @@ module Scan
           sp.async.udp_run
           sp.display
         else
-          $stderr.puts "[x] Need other options, ex. reaper scan --ip 192.168.1.1 -p 1,1000 --full-tcp"
+          $stderr.puts "[x] Need other options, ex. darkshadow scan --ip 192.168.1.1 -p 1,1000 --full-tcp"
           exit
         end
       else

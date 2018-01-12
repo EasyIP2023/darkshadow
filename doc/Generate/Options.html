@@ -96,7 +96,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/reaper/tools/exploit/generate.rb</dd>
+    <dd>lib/darkshadow/tools/exploit/generate.rb</dd>
   </dl>
   
 </div>
@@ -217,7 +217,7 @@
 53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/reaper/tools/exploit/generate.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/darkshadow/tools/exploit/generate.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_string'>get_string</span>
   <span class='ivar'>@string</span>
@@ -295,12 +295,12 @@
 45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/reaper/tools/exploit/generate.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/darkshadow/tools/exploit/generate.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_parser'>parser</span> <span class='op'>=</span> <span class='const'>OptionParser</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_opt'>opt</span><span class='op'>|</span>
-    <span class='id identifier rubyid_opt'>opt</span><span class='period'>.</span><span class='id identifier rubyid_banner'>banner</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Usage: reaper gen [options]\nExample: reaper gen -r buffer_overflow</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_opt'>opt</span><span class='period'>.</span><span class='id identifier rubyid_banner'>banner</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Usage: darkshadow gen [options]\nExample: darkshadow gen -r buffer_overflow</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_opt'>opt</span><span class='period'>.</span><span class='id identifier rubyid_separator'>separator</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
     <span class='id identifier rubyid_opt'>opt</span><span class='period'>.</span><span class='id identifier rubyid_separator'>separator</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Options:</span><span class='tstring_end'>&#39;</span></span>
     <span class='id identifier rubyid_opt'>opt</span><span class='period'>.</span><span class='id identifier rubyid_on'>on</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>-r</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>--remote-exploit &lt;filename&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Generate a remote exploit file</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_file'>file</span><span class='op'>|</span>
@@ -351,7 +351,7 @@
 49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/reaper/tools/exploit/generate.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/darkshadow/tools/exploit/generate.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_string'>set_string</span> <span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='rparen'>)</span>
   <span class='ivar'>@string</span> <span class='op'>=</span> <span class='id identifier rubyid_string'>string</span>

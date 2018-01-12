@@ -1,35 +1,28 @@
-require "reaper/version"
+require "darkshadow/version"
+require "darkshadow/command_names"
 
-# Set command names
-HELP           = "help"
-HELP_TAC       = "-h"
-GENERATE       = "gen"
-PATTERN_CREATE = "pate"
-PATTERN_OFFSET = "poset"
-PORT_SEARCH    = "scan"
-
-module Reaper
+module DarkShadow
   def self.get_first_arg
     case ARGV[0]
     when GENERATE
-      require 'reaper/tools/exploit/generate'
+      require 'darkshadow/tools/exploit/generate'
     when PATTERN_CREATE
-      require 'reaper/tools/exploit/pattern_create'
+      require 'darkshadow/tools/exploit/pattern_create'
     when PATTERN_OFFSET
-      require 'reaper/tools/exploit/pattern_offset'
+      require 'darkshadow/tools/exploit/pattern_offset'
     when PORT_SEARCH
-      require 'reaper/tools/search/scan'
+      require 'darkshadow/tools/search/scan'
     when HELP
       help_message
     when HELP_TAC
       help_message
     else
-      puts '[x] No options selected, try: reaper -h for usage'
+      puts '[x] No options selected, try: darkshadow -h for usage'
     end
   end
 
   def self.help_message
-    puts "Usage: reaper [options]\nExample: reaper pate -l 600"
+    puts "Usage: darkshadow [options]\nExample: darkshadow pate -l 600"
     puts "\nOptions:
       #{GENERATE} \t Exploit Code Generation
       #{PATTERN_CREATE} \t For Pattern Creating
@@ -40,4 +33,4 @@ module Reaper
 end
 
 # Get the first argument in the terminal
-Reaper.get_first_arg
+DarkShadow.get_first_arg
