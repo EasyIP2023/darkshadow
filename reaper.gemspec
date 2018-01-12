@@ -17,9 +17,10 @@ Gem::Specification.new do |spec|
   spec.files += Dir['[A-Z]*']
   spec.files.reject! { |f| f.match(%r{^(test|spec|features)/}) }
 
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.executables << 'reaper'
 
   spec.require_paths = ["lib"]
+	spec.metadata["yard.run"] = "yri"
 
   spec.add_dependency "bundler", "~> 1.15"
   spec.add_dependency "rake", "~> 12.0"

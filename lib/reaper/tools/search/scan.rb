@@ -13,14 +13,14 @@ module Scan
       @ports = ports
       @open_ports = []
       @services = ServiceHash.new
-      @port_count = 1
+      @cp_count = 0
     end
 
     def udp_run
       start_port = @ports[0].to_i
       end_port   = @ports[1].to_i
       @cp_count = end_port
-      until start_port == (end_port+1) do
+      until start_port >= end_port do
         udp_scan start_port
         start_port += 1
       end
@@ -43,7 +43,7 @@ module Scan
       start_port = @ports[0].to_i
       end_port   = @ports[1].to_i
       @cp_count = end_port
-      until start_port == (end_port+1) do
+      until start_port >= end_port do
         tcp_scan start_port
         start_port += 1
       end
@@ -139,11 +139,11 @@ module Scan
         if @opts[:full_tcp]
           sp = Scanner.new @opts[:ip], @opts[:ports]
           sp.async.tcp_run
-          sp.async.display
+          sp.display
         elsif @opts[:udp]
           sp = Scanner.new @opts[:ip], @opts[:ports]
           sp.async.udp_run
-          sp.async.display
+          sp.display
         else
           $stderr.puts "[x] Need other options, ex. reaper scan --ip 192.168.1.1 -p 1,1000 --full-tcp"
           exit

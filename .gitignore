@@ -10,5 +10,8 @@
 # rspec failure tracking
 .rspec_status
 
-# ingore all gem
+# Ignore Build Script
+build_script
+
+# Ignore all gem
 *.gem
