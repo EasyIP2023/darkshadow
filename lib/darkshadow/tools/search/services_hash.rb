@@ -1,4 +1,3 @@
-#!/usr/bin/ruby
 class ServiceHash
 
   def find_service_name(port)

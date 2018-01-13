@@ -1,5 +1,5 @@
 require "darkshadow/version"
-require "darkshadow/command_names"
+require "darkshadow/reap/command_names"
 
 module DarkShadow
   def self.get_first_arg
