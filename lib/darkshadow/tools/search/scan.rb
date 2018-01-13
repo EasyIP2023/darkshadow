@@ -1,5 +1,5 @@
-#!/usr/bin/ruby
 require 'darkshadow/tools/search/services_hash'
+require 'darkshadow/reap/command_names'
 require 'celluloid/current'
 require 'socket'
 require 'optparse'
@@ -81,7 +81,7 @@ module Scan
     def self.parse (args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "Usage: darkshadow gen [options]\nExample: darkshadow scan --ip 192.168.1.1 -p 1,10000 --full-tcp"
+        opt.banner = "Usage: darkshadow #{PORT_SEARCH} [options]\nExample: darkshadow #{PORT_SEARCH} --ip 192.168.1.1 -p 1,10000 --full-tcp"
         opt.separator ''
         opt.separator 'Options:'
 
@@ -139,11 +139,11 @@ module Scan
         if @opts[:full_tcp]
           sp = Scanner.new @opts[:ip], @opts[:ports]
           sp.async.tcp_run
-          sp.display
+          sp.async.display
         elsif @opts[:udp]
           sp = Scanner.new @opts[:ip], @opts[:ports]
           sp.async.udp_run
-          sp.display
+          sp.async.display
         else
           $stderr.puts "[x] Need other options, ex. darkshadow scan --ip 192.168.1.1 -p 1,1000 --full-tcp"
           exit

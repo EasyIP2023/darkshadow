@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.executables << 'darkshadow'
 
   spec.require_paths = ["lib"]
-	spec.metadata["yard.run"] = "yri"
+  spec.metadata["yard.run"] = "yri"
 
   spec.add_dependency "bundler", "~> 1.15"
   spec.add_dependency "rake", "~> 12.0"
