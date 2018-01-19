@@ -1,5 +1,5 @@
-require "darkshadow/version"
-require "darkshadow/reap/command_names"
+require 'darkshadow/version'
+require 'darkshadow/reap/command_names'
 
 module DarkShadow
   class Reap
@@ -11,6 +11,8 @@ module DarkShadow
         require 'darkshadow/tools/exploit/pattern_create'
       when PATTERN_OFFSET
         require 'darkshadow/tools/exploit/pattern_offset'
+      when EGG_HUNTER
+        require 'darkshadow/tools/exploit/egghunter'
       when PORT_SEARCH
         require 'darkshadow/tools/search/scan'
       when HELP

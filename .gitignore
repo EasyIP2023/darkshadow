@@ -15,3 +15,6 @@ build_script
 
 # Ignore all gem
 *.gem
+
+# Ignore all in msf folder
+lib/darkshadow/msf/*
