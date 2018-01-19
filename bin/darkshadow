@@ -2,3 +2,5 @@
 
 require 'bundler/setup'
 require 'darkshadow'
+
+DarkShadow::Reap.new(ARGV[0])
