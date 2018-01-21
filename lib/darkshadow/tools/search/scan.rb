@@ -139,11 +139,11 @@ module Scan
         if @opts[:full_tcp]
           sp = Scanner.new @opts[:ip], @opts[:ports]
           sp.async.tcp_run
-          sp.async.display
+          sp.display
         elsif @opts[:udp]
           sp = Scanner.new @opts[:ip], @opts[:ports]
           sp.async.udp_run
-          sp.async.display
+          sp.display
         else
           $stderr.puts "[x] Need other options, ex. darkshadow scan --ip 192.168.1.1 -p 1,1000 --full-tcp"
           exit

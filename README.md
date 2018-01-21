@@ -53,10 +53,16 @@ $ darkshadow gen --payload <filename>
 $ darkshadow pate -l 600
 ```
 
-**Pattern Offset**
+**Egg Hunting**
 
 ```bash
-$ darkshadow poset -q Aa3A
+$ darkshadow egghunt -f python -e W00T
+```
+
+**VirusTotal Scan**
+
+```bash
+$ darkshadow vts -f python -e W00T
 ```
 
 ## Contributing
