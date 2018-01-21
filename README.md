@@ -2,7 +2,7 @@
 
 ![darkshadow](https://i0.wp.com/www.gsalam.net/wp-content/uploads/2015/12/Protection-Against-Magic-and-Evil-1-GSalam.Net_.jpg?resize=777%2C437)
 
-Gem built for simple rapid exploit development using ruby. The gem is meant for those who want to learn about security researching and those whom already are security researchers. To help learn and assist in the exploit development process. I myself am very new to the world of security researching and want to learn. Essentially this gem will be a combination of different code that along with my own code ;) that should help in assisting exploit development.
+Gem built for simple rapid exploit development using ruby. The gem is meant for those who want to learn about security researching and those whom already are security researchers. To help learn and assist in the exploit development process.
 
 Tutorials being used for development
 * [FuzzySecurity](http://fuzzysecurity.com)
@@ -56,7 +56,13 @@ $ darkshadow pate -l 600
 **Egg Hunting**
 
 ```bash
-$ darkshadow eggh -f python -e W00T
+$ darkshadow egghunt -f python -e W00T
+```
+
+**VirusTotal Scan**
+
+```bash
+$ darkshadow vts -f python -e W00T
 ```
 
 ## Contributing

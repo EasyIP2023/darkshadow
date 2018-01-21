@@ -51,8 +51,8 @@ shellcode = ( )
 OFFSET = #Enter NUM
 BYTES  = #Enter NUM
 
-SEH  = # Ex. '\xEB\x06\x90\x90'
-nSEH = # Ex. '\x19\x76\x61\x61'
+SEH  = # Ex. "+'"\xEB\x06\x90\x90"'+"
+nSEH = # Ex. "+'"\x19\x76\x61\x61"'+"
 nops = " + '"\x90"' +" * 20 + shellcode
 
 # Designed to deal with SEH (POP,POP,RET)
