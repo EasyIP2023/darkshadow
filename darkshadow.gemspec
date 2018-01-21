@@ -27,6 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rex', '~> 2.0'
   spec.add_runtime_dependency 'rex-text', '~> 0'
   spec.add_runtime_dependency 'colorize', '~> 0'
-  spec.add_runtime_dependency 'httpclient', '~> 2.8'
   spec.add_runtime_dependency 'celluloid', '~> 0'
 end

@@ -59,12 +59,6 @@ $ darkshadow pate -l 600
 $ darkshadow egghunt -f python -e W00T
 ```
 
-**VirusTotal Scan**
-
-```bash
-$ darkshadow vts -f python -e W00T
-```
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/EasyIP2023/darkshadow.
