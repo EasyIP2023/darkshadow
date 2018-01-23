@@ -19,6 +19,10 @@ module DarkShadow
         help_message
       when HELP_TAC
         help_message
+      when VERS
+        display_version
+      when VERS_TAC
+        display_version
       else
         puts '[x] No options selected, try: darkshadow -h for usage'
       end

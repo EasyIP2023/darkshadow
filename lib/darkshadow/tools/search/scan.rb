@@ -1,5 +1,6 @@
 require 'darkshadow/tools/search/services_hash'
 require 'darkshadow/reap/command_names'
+require 'darkshadow/reap/banners'
 require 'celluloid/current'
 require 'socket'
 require 'optparse'
@@ -81,7 +82,7 @@ module Scan
     def self.parse (args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "Usage: darkshadow #{PORT_SEARCH} [options]\nExample: darkshadow #{PORT_SEARCH} --ip 192.168.1.1 -p 1,10000 --full-tcp"
+        opt.banner = "#{Banners.rand_banner}\n\nUsage: darkshadow #{PORT_SEARCH} [options]\nExample: darkshadow #{PORT_SEARCH} --ip 192.168.1.1 -p 1,10000 --full-tcp"
         opt.separator ''
         opt.separator 'Options:'
 
@@ -117,7 +118,7 @@ module Scan
 
       parser.parse!(args)
 
-      raise OptionParser::MissingArgument, '[x] No options set, try -h for usage' if options.empty?
+      raise OptionParser::MissingArgument, '[x] No options set, try darkshadow scan -h for usage' if options.empty?
       options
     end
   end
