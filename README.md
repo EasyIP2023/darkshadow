@@ -59,6 +59,32 @@ $ darkshadow pate -l 600
 $ darkshadow egghunt -f python -e W00T
 ```
 
+**Packet Sniffer**
+Becuase you are using raw sockets you need to run the command with sudo permissions.
+
+```bash
+$ sudo darkshadow sniff
+```
+
+```bash
+$ rvmsudo darkshadow sniff
+```
+
+Be sure to do one of the following befor executing
+```
+Warning: can not check `/etc/sudoers` for `secure_path`, falling back to call via `/usr/bin/env`, this breaks rules from `/etc/sudoers`. Run:
+
+    export rvmsudo_secure_path=1
+
+to avoid the warning, put it in shell initialization file to make it persistent.
+
+In case there is no `secure_path` in `/etc/sudoers`. Run:
+
+    export rvmsudo_secure_path=0
+
+to avoid the warning, put it in shell initialization file to make it persistent.
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/EasyIP2023/darkshadow.

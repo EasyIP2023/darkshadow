@@ -11,6 +11,7 @@ GENERATE       = "gen"
 PATTERN_CREATE = "pate"
 PATTERN_OFFSET = "poset"
 PORT_SEARCH    = "scan"
+PACKET_SNIFFER = "psniff"
 EGG_HUNTER     = "egghunt"
 DARK_SHADOW    = "darkshadow".colorize(:light_red)
 
@@ -26,6 +27,8 @@ def help_message
     #{EGG_HUNTER.colorize(:light_green)} \t For Egghunting VAS (Virtual Address Space)\n
     #{"Scanning".colorize(:light_red)}
     #{PORT_SEARCH.colorize(:light_green)} \t For Port Searching\n
+    #{"Sniffing".colorize(:light_red)}
+    #{PACKET_SNIFFER.colorize(:light_green)} \t For Packet Sniffing TCP/UDP/ICMP... Packets\n
     #{"Help Message".colorize(:light_red)}
     #{HELP.colorize(:light_green)} \t for this message here
     #{VERS.colorize(:light_green)} \t for version number\n"

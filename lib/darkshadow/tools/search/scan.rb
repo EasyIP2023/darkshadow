@@ -82,7 +82,7 @@ module Scan
     def self.parse (args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "#{Banners.rand_banner}\n\nUsage: darkshadow #{PORT_SEARCH} [options]\nExample: darkshadow #{PORT_SEARCH} --ip 192.168.1.1 -p 1,10000 --full-tcp"
+        opt.banner = "#{Banners.rand_banner}\n\nUsage: #{DARK_SHADOW} #{PORT_SEARCH.colorize(:light_yellow)} [options]\nExample: #{DARK_SHADOW} #{PORT_SEARCH.colorize(:light_yellow)} --ip 192.168.1.1 -p 1,10000 --full-tcp"
         opt.separator ''
         opt.separator 'Options:'
 
@@ -118,7 +118,7 @@ module Scan
 
       parser.parse!(args)
 
-      raise OptionParser::MissingArgument, '[x] No options set, try darkshadow scan -h for usage' if options.empty?
+      raise OptionParser::MissingArgument, "[x] No options set, try #{DARK_SHADOW} #{PORT_SEARCH.colorize(:light_yellow)} -h for usage" if options.empty?
       options
     end
   end
@@ -146,7 +146,7 @@ module Scan
           sp.async.udp_run
           sp.display
         else
-          $stderr.puts "[x] Need other options, ex. darkshadow scan --ip 192.168.1.1 -p 1,1000 --full-tcp"
+          $stderr.puts "[x] Need other options, ex. #{DARK_SHADOW} #{PORT_SEARCH.colorize(:light_yellow)} --ip 192.168.1.1 -p 1,1000 --full-tcp"
           exit
         end
       else

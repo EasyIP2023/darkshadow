@@ -15,13 +15,11 @@ module DarkShadow
         require 'darkshadow/tools/exploit/egghunter'
       when PORT_SEARCH
         require 'darkshadow/tools/search/scan'
-      when HELP
+      when PACKET_SNIFFER
+        require 'darkshadow/tools/sniffer/packet_sniffer'
+      when HELP, HELP_TAC
         help_message
-      when HELP_TAC
-        help_message
-      when VERS
-        display_version
-      when VERS_TAC
+      when VERS, VERS_TAC
         display_version
       else
         puts '[x] No options selected, try: darkshadow -h for usage'
