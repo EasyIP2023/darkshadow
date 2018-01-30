@@ -8,7 +8,9 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include "darkshadow.h"
+#include <signal.h>
 
+void sighandler(int);
 void ProcessPacket(unsigned char* , int);
 void print_ip_header(unsigned char* , int);
 void print_tcp_packet(unsigned char* , int);
@@ -25,10 +27,12 @@ VALUE sniff;
 
 int rb_start_sniffing () {
     DEBUG_PRINT("rb_start_sniff");
+    signal(SIGINT, sighandler);
+    signal(SIGQUIT, sighandler);
 
     /* Check to make sure we have sudo permissions */
     uid_t uid=getuid(), euid=geteuid();
-    if (uid > 0 || uid ==euid) {
+    if (uid != 0 && uid == euid) {
       printf("[x] You must run command with sudo permissions\n");
       printf("[x] Ex. rvmsudo darkshadow psniff\n");
       printf("[x] Ex. sudo darkshadow psniff\n");
@@ -287,6 +291,11 @@ void PrintData (unsigned char* data , int Size)
             fprintf(logfile,"\n");
         }
     }
+}
+
+void sighandler(int signum) {
+  printf("\nExiting Packet Sniffer...\n");
+  exit(1);
 }
 
 void Init_sniffer(void) {
