@@ -2,7 +2,7 @@
 
 ![darkshadow](https://i0.wp.com/www.gsalam.net/wp-content/uploads/2015/12/Protection-Against-Magic-and-Evil-1-GSalam.Net_.jpg?resize=777%2C437)
 
-Gem built for simple rapid exploit development using ruby. The gem is meant for those who want to learn about security researching and those whom already are security researchers. To help learn and assist in the exploit development process.
+Gem built for simple rapid exploit development using ruby. The gem is meant for those who want to learn about security researching and those whom already are security researchers. To help learn and assist in the exploit development process. It includes tools that I've worked on along with tools from the metasploit framework and other locations on the internet.
 
 Tutorials being used for development
 * [FuzzySecurity](http://fuzzysecurity.com)
@@ -57,6 +57,33 @@ $ darkshadow pate -l 600
 
 ```bash
 $ darkshadow egghunt -f python -e W00T
+```
+
+**Packet Sniffer**
+
+Becuase you are using raw sockets you need to run the command with sudo permissions.
+
+```bash
+$ sudo darkshadow sniff
+```
+
+```bash
+$ rvmsudo darkshadow sniff
+```
+
+Be sure to do one of the following befor executing
+```
+Warning: can not check `/etc/sudoers` for `secure_path`, falling back to call via `/usr/bin/env`, this breaks rules from `/etc/sudoers`. Run:
+
+    export rvmsudo_secure_path=1
+
+to avoid the warning, put it in shell initialization file to make it persistent.
+
+In case there is no `secure_path` in `/etc/sudoers`. Run:
+
+    export rvmsudo_secure_path=0
+
+to avoid the warning, put it in shell initialization file to make it persistent.
 ```
 
 ## Contributing
