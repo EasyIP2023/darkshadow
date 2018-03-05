@@ -13,8 +13,6 @@ module DarkShadow
         require 'darkshadow/tools/exploit/pattern_offset'
       when EGG_HUNTER
         require 'darkshadow/tools/exploit/egghunter'
-      when PORT_SEARCH
-        require 'darkshadow/tools/search/scan'
       when PACKET_SNIFFER
         require 'darkshadow/tools/sniffer/packet_sniffer'
       when HELP, HELP_TAC
