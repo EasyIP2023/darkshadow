@@ -88,5 +88,6 @@ gdb.writem(argv[2] + 5, 'FAT') # echo FAT
 puts gdb.execute('continue')
 # Continuing.
 # FAT
-# [Inferior 1 (process 32217) exited normally]"
+# [Inferior 1 (process 32217) exited normally]
+"
 end
