@@ -15,8 +15,7 @@ EXEC           = "exec"
 DARK_SHADOW    = "darkshadow".colorize(:light_red)
 
 def help_message
-  puts "Usage: #{DARK_SHADOW} [options]\nExample: #{DARK_SHADOW} #{PATTERN_CREATE.colorize(:light_yellow)} -l 600"
-  puts "\nOptions:\n
+  puts "Options:\n
     #{"Exploitation".colorize(:light_red)}
     #{GENERATE.colorize(:light_green)} \t Exploit Code Generation
     #{PATTERN_CREATE.colorize(:light_green)} \t For Pattern Creating

@@ -2,6 +2,8 @@
 
 ![darkshadow](https://i0.wp.com/www.gsalam.net/wp-content/uploads/2015/12/Protection-Against-Magic-and-Evil-1-GSalam.Net_.jpg?resize=777%2C437)
 
+I'm still new to making ruby gems. So please bare with me! :)
+
 Gem built for simple rapid exploit development using ruby. The gem is meant for those who want to learn about security researching and those whom already are security researchers. To help learn and assist in the exploit development process. It includes tools that I've worked on along with tools from the metasploit framework and other locations on the internet.
 
 Tutorials being used for development
