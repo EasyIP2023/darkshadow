@@ -60,3 +60,33 @@ buffer = \"A\" * OFFSET + SEH + nSEH + nops + \"B\" * (BYTES - nops.length)
 File.open(filename, 'w+') { |f| f.write(buffer) }
 "
 end
+
+def get_gdb
+"#!/usr/bin/ruby
+
+require 'gdb'
+
+# launch a gdb instance
+gdb = GDB::GDB.new('bash')
+
+# 1. set breakpoint
+gdb.break('main')
+#=> \"Breakpoint 1 at 0x41eed0\"
+gdb.run('-c \"echo cat\"')
+
+# 2. get argv pointers
+rdi = gdb.reg(:rdi)
+#=> 3
+rsi = gdb.reg(:rsi)
+argv = gdb.readm(rsi, rdi, as: :u64)
+argv.map { |c| '0x%x' % c }
+#=> ['0x7fffffffe61b', '0x7fffffffe625', '0x7fffffffe628']
+
+# 3. overwrite argv[2]'s 'cat' to 'FAT'
+gdb.writem(argv[2] + 5, 'FAT') # echo FAT
+
+puts gdb.execute('continue')
+# Continuing.
+# FAT
+# [Inferior 1 (process 32217) exited normally]"
+end

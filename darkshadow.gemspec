@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rex', '~> 2.0'
   spec.add_dependency 'rex-text', '~> 0'
   spec.add_dependency 'colorize', '~> 0'
+  spec.add_dependency 'gdb', '~> 0'
 end
