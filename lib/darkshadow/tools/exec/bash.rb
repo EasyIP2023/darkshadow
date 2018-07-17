@@ -3,14 +3,14 @@ require 'optparse'
 
 module Bash
   class Options
-    def self.parse (args)
+    def self.parse(args)
       options = {}
       parser = OptionParser.new do |opt|
         opt.banner = "Usage: #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} [options]\nExample: #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} -s file.txt"
         opt.separator ''
         opt.separator 'Options:'
 
-        opt.on('-s','--sudo','Execute with sudo permissions') do
+        opt.on('-s', '--sudo', 'Execute with sudo permissions') do
           options[:sudo] = true
         end
 
@@ -18,7 +18,7 @@ module Bash
           options[:peda] = true
         end
 
-        opt.on('--shred <filename>', String, "shred a file wiping bits to zero") do |file|
+        opt.on('--shred <filename>', String, 'shred a file wiping bits to zero') do |file|
           options[:file] = file
           options[:shred] = true
         end
@@ -42,24 +42,22 @@ module Bash
 
   class Driver
     def initialize
-      begin
-        @opts = Options.parse(ARGV)
-      rescue OptionParser::ParseError => e
-        $stderr.puts "[x] #{e.message}"
-        exit
-      end
+      @opts = Options.parse(ARGV)
+    rescue OptionParser::ParseError => e
+      warn "[x] #{e.message}"
+      exit
     end
 
     def run
       if @opts[:shred]
-        `#{"sudo" if @opts[:sudo]} shred -n 30 -uvz #{@opts[:file]}`
+        `#{'sudo' if @opts[:sudo]} shred -n 30 -uvz #{@opts[:file]}`
       elsif @opts[:peda]
-        `git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit && echo "DONE! debug your program with gdb and enjoy"` unless File.exists?("~/peda/peda.py")
+        `git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit && echo "DONE! debug your program with gdb and enjoy"` unless File.exist?('~/peda/peda.py')
       elsif @opts[:vuln]
         # Temporarily disable ASLR && Allow ptrace processes
         `sudo sysctl -w kernel.randomize_va_space=0 && sudo sysctl -w kernel.yama.ptrace_scope=0`
-        puts "Temporarily disabled linux Adress Space Layout Randomization(ASLR)..."
-        puts "Allowing ptrace processes..."
+        puts 'Temporarily disabled linux Adress Space Layout Randomization(ASLR)...'
+        puts 'Allowing ptrace processes...'
       end
     end
   end
@@ -69,5 +67,5 @@ end
 begin
   @driver.run
 rescue ::Exception => e
-  $stderr.puts "[x] #{e.class}: #{e.message}"
+  warn "[x] #{e.class}: #{e.message}"
 end
