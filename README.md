@@ -55,10 +55,23 @@ $ darkshadow gen --payload <filename>
 $ darkshadow pate -l 600
 ```
 
+**Patern Offset**
+
+```bash
+$ darkshadow poset -q Aa3A
+```
+
 **Egg Hunting**
 
 ```bash
 $ darkshadow egghunt -f python -e W00T
+```
+
+**Bash Executions**
+
+```bash
+# Disable the Address Space Layout Randomization (ASLR)
+$ darkshadow exec -l d
 ```
 
 **Packet Sniffer**
@@ -66,11 +79,11 @@ $ darkshadow egghunt -f python -e W00T
 Becuase you are using raw sockets you need to run the command with sudo permissions.
 
 ```bash
-$ sudo darkshadow sniff
+$ sudo darkshadow psniff
 ```
 
 ```bash
-$ rvmsudo darkshadow sniff
+$ rvmsudo darkshadow psniff
 ```
 
 Be sure to do one of the following befor executing
