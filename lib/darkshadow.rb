@@ -17,6 +17,8 @@ module DarkShadow
         require 'darkshadow/tools/sniffer/packet_sniffer'
       when EXEC
         require 'darkshadow/tools/exec/bash'
+      when SEND
+        require 'darkshadow/tools/exec/send'
       when HELP, HELP_TAC
         help_message
       when VERS, VERS_TAC
