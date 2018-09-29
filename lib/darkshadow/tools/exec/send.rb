@@ -24,7 +24,7 @@ module Send
           options[:buffer] = buff
         end
 
-        opt.on('--bs <buffer size>', Integer , 'Buffer size') do |bsize|
+        opt.on('--bs <buffer size>', Integer, 'Buffer size') do |bsize|
           options[:bsize] = bsize
         end
 
@@ -50,16 +50,12 @@ module Send
 
     def run
       if @opts[:ip] && @opts[:port] && @opts[:buffer] && @opts[:bsize]
-        socket_addr = Socket.pack_sockaddr_in(@opts[:port], @opts[:ip])
         buff = @opts[:buffer] * @opts[:bsize]
 
-        s = Socket.new(:INET, :STREAM, 0)
-        s.settimeout(2)
+        s = TCPSocket.open(@opts[:ip], @opts[:port])
 
-        # connect
-        s.connect(socket_addr)
-
-        s.send(@opts[:buffer])
+        s.send(buff, 0)
+        s.close
       else
         puts "You are missing options for"
         puts " [x] ip" if @opts[:ip].nil?
