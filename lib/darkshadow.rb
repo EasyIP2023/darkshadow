@@ -19,12 +19,14 @@ module DarkShadow
         require 'darkshadow/tools/exec/bash'
       when SEND
         require 'darkshadow/tools/exec/send'
+      when FLE
+        require 'darkshadow/tools/debugger/fle'
       when HELP, HELP_TAC
         help_message
       when VERS, VERS_TAC
         display_version
       else
-        puts '[x] No options selected, try: darkshadow -h for usage'
+        warn '[x] No options selected, try: darkshadow -h for usage'
       end
     end
   end

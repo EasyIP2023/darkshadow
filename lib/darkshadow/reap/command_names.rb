@@ -13,7 +13,8 @@ PACKET_SNIFFER = 'psniff'.freeze
 EGG_HUNTER     = 'egghunt'.freeze
 EXEC           = 'exec'.freeze
 SEND           = 'send'.freeze
-DARK_SHADOW    = 'darkshadow'.colorize(:light_red)
+FLE            = 'gdb'.freeze
+DARK_SHADOW    = 'darkshadow'.colorize(:light_red).freeze
 
 def help_message
   puts "Options:\n
@@ -27,6 +28,8 @@ def help_message
     #{'Executions'.colorize(:light_red)}
     #{EXEC.colorize(:light_green)} \t For execting simple bash scripts that make life easier :)
     #{SEND.colorize(:light_green)} \t For sending a buffer remotely to crash a program\n
+    #{'Find Linux Exploit'.colorize(:light_red)}
+    #{FLE.colorize(:light_green)} \t For finding exploits in gdb without enter it\n
     #{'Help Message'.colorize(:light_red)}
     #{HELP.colorize(:light_green)} \t For this message here
     #{VERS.colorize(:light_green)} \t For version number\n"

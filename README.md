@@ -74,6 +74,12 @@ $ darkshadow egghunt -f python -e W00T
 $ darkshadow exec -l d
 ```
 
+**Send Remote Buffers**
+
+```bash
+$ darkshadow send --ip 10.0.0.1 -p 8080 -b AAAA --bs 1024
+```
+
 **Packet Sniffer**
 
 Becuase you are using raw sockets you need to run the command with sudo permissions.
@@ -86,7 +92,7 @@ $ sudo darkshadow psniff
 $ rvmsudo darkshadow psniff
 ```
 
-Be sure to do one of the following befor executing
+Be sure to do one of the following before executing
 ```
 Warning: can not check `/etc/sudoers` for `secure_path`, falling back to call via `/usr/bin/env`, this breaks rules from `/etc/sudoers`. Run:
 

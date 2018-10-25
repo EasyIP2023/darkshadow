@@ -2,7 +2,6 @@ require 'darkshadow/reap/command_names'
 require 'optparse'
 require 'socket'
 
-
 module Send
   class Options
     def self.parse(args)
@@ -57,11 +56,11 @@ module Send
         s.send(buff, 0)
         s.close
       else
-        puts "You are missing options for"
-        puts " [x] ip" if @opts[:ip].nil?
-        puts " [x] port" if @opts[:port].nil?
-        puts " [x] buffer" if @opts[:buffer].nil?
-        puts " [x] bsize" if @opts[:bsize].nil?
+        warn 'You are missing options for'
+        warn '   [x] ip'     if @opts[:ip].nil?
+        warn '   [x] port'   if @opts[:port].nil?
+        warn '   [x] buffer' if @opts[:buffer].nil?
+        warn '   [x] bsize'  if @opts[:bsize].nil?
       end
     end
   end
