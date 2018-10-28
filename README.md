@@ -80,6 +80,17 @@ $ darkshadow exec -l d
 $ darkshadow send --ip 10.0.0.1 -p 8080 -b AAAA --bs 1024
 ```
 
+**Find exploits without entering gdb**
+
+Basic example
+```bash
+$ darkshadow gdb -i bash -a 64 -b "main" --rwo '-c "echo cat"' --reg rdi,rsi
+
+# For Full Output
+$ darkshadow gdb -i bash -a 64 -b main -e 'run','print $rsi'
+```
+![gdb full screen](https://github.com/EasyIP2023/darkshadow/blob/development/pics/gdb_full_screenshot.png)
+
 **Packet Sniffer**
 
 Becuase you are using raw sockets you need to run the command with sudo permissions.

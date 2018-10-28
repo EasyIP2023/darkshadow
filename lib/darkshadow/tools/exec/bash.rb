@@ -18,8 +18,8 @@ module Bash
           options[:peda] = true
         end
 
-        opt.on('--shred <filename>', String, 'shred a file wiping bits to zero (Add "" for multiple files)') do |file|
-          options[:file]  = file
+        opt.on('--shred file1,file2,file3', Array, 'shred a file wiping bits to zero') do |f|
+          options[:file]  = f.map { |v| v.to_s }
           options[:shred] = true
         end
 
@@ -57,7 +57,7 @@ module Bash
 
     def run
       if @opts[:shred]
-        `#{'sudo' if @opts[:sudo]} shred -n 30 -uvz #{@opts[:file]}`
+        @opts[:file].each { |f| `#{'sudo' if @opts[:sudo]} shred -n 30 -uvz #{f}` }
       elsif @opts[:shred_folder]
         `#{'sudo' if @opts[:sudo]} find #{@opts[:folder]} -type f -exec shred -n 30 -uvz {} \\;`
         `#{'sudo' if @opts[:sudo]} rm -rfv #{@opts[:folder]}`
