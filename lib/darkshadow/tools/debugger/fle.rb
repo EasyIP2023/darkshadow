@@ -8,7 +8,7 @@ module Fle
     def self.parse(args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "Usage: #{DARK_SHADOW} #{FLE.colorize(:light_yellow)} [options]\nExample: #{DARK_SHADOW} #{FLE.colorize(:light_yellow)} --init ./vuln_server"
+        opt.banner = "Usage: #{DARK_SHADOW} #{FLE.colorize(:light_yellow)} [options]\nExample: #{DARK_SHADOW} #{FLE.colorize(:light_yellow)} --init ./vuln_server -a 64 -b 'main' -e 'run','print $rsi'"
         opt.separator ''
         opt.separator 'Options:'
 
@@ -20,12 +20,12 @@ module Fle
           options[:arch] = arch
         end
 
-        opt.on('-b', '--brk <main>', String, 'Enter where you want to set a break point') do |brk|
-          options[:brk] = brk
+        opt.on('-b', '--brk \'main\',\'other breaks\'', Array, 'Enter where you want to set a break point') do |brk|
+          options[:brk] = brk.map(&:to_s)
           options[:brk_check] = true
         end
 
-        opt.on('-r', '--run', 'Run code in gdb') do |run_with_opt|
+        opt.on('-r', '--run', 'Run code in gdb') do
           options[:run] = true
         end
 
@@ -39,21 +39,23 @@ module Fle
         end
 
         opt.on('--reg <rdi,rsi,rsp>', Array, 'Enter register want to search') do |reg|
-          options[:reg] = reg.map { |r| r.to_s }
+          options[:reg] = reg.map(&:to_s)
           options[:regi] = true
         end
 
         opt.on('-e', '--execute \'run\',\'print $rsi\'', Array, 'Execute gdb commands') do |exe_gdb|
-          options[:exe_gdb] = exe_gdb.map { |e| e.to_s }
+          options[:exe_gdb] = exe_gdb.map(&:to_s)
           options[:exe_gdb_check] = true
         end
 
         options[:arm] = false
-        opt.on('--arm', 'Only Specify if arm archeticuture') do |init|
+        opt.on('--arm', 'Only Specify if arm archeticuture') do
           options[:arm] = true
         end
 
         opt.on_tail('-h', '--help', 'Show this message') do
+          warn '[x] Current main features to use -b for break -e for execute'
+          warn '[x] This portion of darkshadow is still in Testing!!! ;)'
           $stdout.puts opt
           exit
         end
@@ -74,25 +76,26 @@ module Fle
     end
 
     def run
-      gdb = @opts[:arm] ? GDB::GDB.new("#{@opts[:exe]}", gdb: 'gdb-multiarch') : GDB::GDB.new("-q #{@opts[:exe]}")
+      gdb = @opts[:arm] ? GDB::GDB.new((@opts[:exe]).to_s, gdb: 'gdb-multiarch') : GDB::GDB.new("-q #{@opts[:exe]}")
 
       gdb.interact if @opts[:normal] # Go into gdb interactive mode if normal selected
 
       if @opts[:arch] == 32
-        gdb.break(@opts[:brk]) if @opts[:brk_check]
+        @opts[:brk].each { |b| gdb.break(b) } if @opts[:brk_check]
 
         if @opts[:run] && @opts[:rwo]
-          warn "[x] Please decide if you want to just run or run with options"
+          warn '[x] Please decide if you want to just run or run with options'
           exit
         end
 
-        gdb.run if @opts[:run]
-        gdb.run(@opts[:run_opt]) if @opts[:rwo]
+        puts gdb.run if @opts[:run]
+        puts gdb.run(@opts[:run_opt]) if @opts[:rwo]
 
         reg = @opts[:r] ? cycle_through_reg_32bit(gdb, @opts[:reg]) : {}
 
         @opts[:exe_gdb].each { |e| execute(gdb, e) } if @opts[:exe_gdb_check]
 
+        # Still in testing
         if @opts[:regi]
           reg = cycle_through_reg_64bit(gdb, @opts[:reg])
 
@@ -105,25 +108,24 @@ module Fle
           puts gdb.execute('continue')
         end
       elsif @opts[:arch] == 64
-        gdb.break(@opts[:brk]) if @opts[:brk_check]
+        @opts[:brk].each { |b| gdb.break(b) } if @opts[:brk_check]
 
         if @opts[:run] && @opts[:rwo]
-          warn "[x] Please decide if you want to just run or run with options"
+          warn '[x] Please decide if you want to just run or run with options'
           exit
         end
 
-        gdb.run if @opts[:run]
-        gdb.run(@opts[:run_opt]) if @opts[:rwo]
+        puts gdb.run if @opts[:run]
+        puts gdb.run(@opts[:run_opt]) if @opts[:rwo]
 
         @opts[:exe_gdb].each { |e| execute(gdb, e) } if @opts[:exe_gdb_check]
 
-
+        # Still in testing
         if @opts[:regi]
           reg = cycle_through_reg_64bit(gdb, @opts[:reg])
 
           argv = gdb.readm(reg[:rsi], reg[:rdi], as: :u64)
 
-          puts argv
           argv.map { |c| format('0x%x', c) }
           print argv
           puts
@@ -131,7 +133,7 @@ module Fle
           puts gdb.execute('continue')
         end
       else
-        warn "[x] No archeticuture type was selected"
+        warn "No options set, try #{DARK_SHADOW} #{FLE.colorize(:light_yellow)} -h for usage"
       end
     end
   end

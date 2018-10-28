@@ -5,7 +5,7 @@ def get_register(gdb, reg)
 end
 
 def execute(gdb, command)
-  puts gdb.execute(command.to_s)
+  puts gdb.execute(command)
 end
 
 def cycle_through_reg_32bit(gdb, reg_cycle)

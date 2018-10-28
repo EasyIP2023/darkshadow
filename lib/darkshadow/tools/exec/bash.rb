@@ -19,7 +19,7 @@ module Bash
         end
 
         opt.on('--shred file1,file2,file3', Array, 'shred a file wiping bits to zero') do |f|
-          options[:file]  = f.map { |v| v.to_s }
+          options[:file]  = f.map(&:to_s)
           options[:shred] = true
         end
 

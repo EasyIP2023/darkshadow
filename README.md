@@ -87,8 +87,9 @@ Basic example
 $ darkshadow gdb -i bash -a 64 -b "main" --rwo '-c "echo cat"' --reg rdi,rsi
 
 # For Full Output
-$ darkshadow gdb -i bash -a 64 -b main -e 'run','print $rsi'
+$ darkshadow gdb -i bash -a 64 -b 'main' -e 'run','print $rsi'
 ```
+
 ![gdb full screen](https://github.com/EasyIP2023/darkshadow/blob/development/pics/gdb_full_screenshot.png)
 
 **Packet Sniffer**
