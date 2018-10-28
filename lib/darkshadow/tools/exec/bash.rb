@@ -3,14 +3,14 @@ require 'optparse'
 
 module Bash
   class Options
-    def self.parse (args)
+    def self.parse(args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "Usage: #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} [options]\nExample: #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} -s file.txt"
+        opt.banner = "Usage: #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} [options]\nExample: #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} -l d\n\t #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} --sf \"test\\ folder/\""
         opt.separator ''
         opt.separator 'Options:'
 
-        opt.on('-s','--sudo','Execute with sudo permissions') do
+        opt.on('-s', '--sudo', 'Execute with sudo permissions') do
           options[:sudo] = true
         end
 
@@ -18,13 +18,20 @@ module Bash
           options[:peda] = true
         end
 
-        opt.on('--shred <filename>', String, "shred a file wiping bits to zero") do |file|
-          options[:file] = file
+        opt.on('--shred file1,file2,file3', Array, 'shred a file wiping bits to zero') do |f|
+          options[:file]  = f.map(&:to_s)
           options[:shred] = true
         end
 
-        opt.on('-l', '--linux-exploit', 'Setting Linux into a vulnerable state by temp disabling ASLR') do
-          options[:vuln] = true
+        opt.on('--sf "<folder name>"', String, 'shred files in folder wiping bits to zero (Be sure to add "<folder>")') do |folder|
+          options[:folder]       = folder
+          options[:shred_folder] = true
+        end
+
+        opt.on('-l <(e/d) enable/disable ASLR>', String, 'Setting Linux into a vulnerable state by temp disabling ASLR') do |ed|
+          options[:vuln]    = true
+          options[:enable]  = ed == 'e' || ed == 'enable' ? true : false
+          options[:disable] = ed == 'd' || ed == 'disable' ? true : false
         end
 
         opt.on_tail('-h', '--help', 'Show this message') do
@@ -42,24 +49,32 @@ module Bash
 
   class Driver
     def initialize
-      begin
-        @opts = Options.parse(ARGV)
-      rescue OptionParser::ParseError => e
-        $stderr.puts "[x] #{e.message}"
-        exit
-      end
+      @opts = Options.parse(ARGV)
+    rescue OptionParser::ParseError => e
+      warn "[x] #{e.message}"
+      exit
     end
 
     def run
       if @opts[:shred]
-        `#{"sudo" if @opts[:sudo]} shred -n 30 -uvz #{@opts[:file]}`
+        @opts[:file].each { |f| `#{'sudo' if @opts[:sudo]} shred -n 30 -uvz #{f}` }
+      elsif @opts[:shred_folder]
+        `#{'sudo' if @opts[:sudo]} find #{@opts[:folder]} -type f -exec shred -n 30 -uvz {} \\;`
+        `#{'sudo' if @opts[:sudo]} rm -rfv #{@opts[:folder]}`
       elsif @opts[:peda]
-        `git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit && echo "DONE! debug your program with gdb and enjoy"` unless File.exists?("~/peda/peda.py")
+        `git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit && echo "DONE! debug your program with gdb and enjoy"` unless File.exist?('~/peda/peda.py')
       elsif @opts[:vuln]
-        # Temporarily disable ASLR && Allow ptrace processes
-        `sudo sysctl -w kernel.randomize_va_space=0 && sudo sysctl -w kernel.yama.ptrace_scope=0`
-        puts "Temporarily disabled linux Adress Space Layout Randomization(ASLR)..."
-        puts "Allowing ptrace processes..."
+        if @opts[:disable]
+          # Temporarily disable ASLR && Allow ptrace processes
+          `sudo sysctl -w kernel.randomize_va_space=0 && sudo sysctl -w kernel.yama.ptrace_scope=0`
+          puts 'Temporarily disabled linux Adress Space Layout Randomization(ASLR)...'
+          puts 'Allowing ptrace processes...'
+        end
+        if @opts[:enable]
+          `sudo sysctl -w kernel.randomize_va_space=2 && sudo sysctl -w kernel.yama.ptrace_scope=1`
+          puts 'Enabled Linux Adress Space Layout Randomization(ASLR)...'
+          puts 'Reset ptrace processes...'
+        end
       end
     end
   end
@@ -69,5 +84,5 @@ end
 begin
   @driver.run
 rescue ::Exception => e
-  $stderr.puts "[x] #{e.class}: #{e.message}"
+  warn "[x] #{e.class}: #{e.message}"
 end

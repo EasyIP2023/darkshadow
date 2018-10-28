@@ -15,3 +15,10 @@ build_script
 
 # Ignore all Gems
 *.gem
+
+# Ignore .gdb_history
+.gdb_history
+
+# Ignore peda *
+peda-session-bash.txt
+peda-session-uname.txt

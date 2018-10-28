@@ -2,6 +2,8 @@
 
 ![darkshadow](https://i0.wp.com/www.gsalam.net/wp-content/uploads/2015/12/Protection-Against-Magic-and-Evil-1-GSalam.Net_.jpg?resize=777%2C437)
 
+I'm still new to making ruby gems. So please bare with me! :)
+
 Gem built for simple rapid exploit development using ruby. The gem is meant for those who want to learn about security researching and those whom already are security researchers. To help learn and assist in the exploit development process. It includes tools that I've worked on along with tools from the metasploit framework and other locations on the internet.
 
 Tutorials being used for development
@@ -53,25 +55,56 @@ $ darkshadow gen --payload <filename>
 $ darkshadow pate -l 600
 ```
 
+**Patern Offset**
+
+```bash
+$ darkshadow poset -q Aa3A
+```
+
 **Egg Hunting**
 
 ```bash
 $ darkshadow egghunt -f python -e W00T
 ```
 
+**Bash Executions**
+
+```bash
+# Disable the Address Space Layout Randomization (ASLR)
+$ darkshadow exec -l d
+```
+
+**Send Remote Buffers**
+
+```bash
+$ darkshadow send --ip 10.0.0.1 -p 8080 -b AAAA --bs 1024
+```
+
+**Find exploits without entering gdb**
+
+Basic example
+```bash
+$ darkshadow gdb -i bash -a 64 -b "main" --rwo '-c "echo cat"' --reg rdi,rsi
+
+# For Full Output
+$ darkshadow gdb -i bash -a 64 -b 'main' -e 'run','print $rsi'
+```
+
+![gdb full screen](https://github.com/EasyIP2023/darkshadow/blob/development/pics/gdb_full_screenshot.png)
+
 **Packet Sniffer**
 
 Becuase you are using raw sockets you need to run the command with sudo permissions.
 
 ```bash
-$ sudo darkshadow sniff
+$ sudo darkshadow psniff
 ```
 
 ```bash
-$ rvmsudo darkshadow sniff
+$ rvmsudo darkshadow psniff
 ```
 
-Be sure to do one of the following befor executing
+Be sure to do one of the following before executing
 ```
 Warning: can not check `/etc/sudoers` for `secure_path`, falling back to call via `/usr/bin/env`, this breaks rules from `/etc/sudoers`. Run:
 
