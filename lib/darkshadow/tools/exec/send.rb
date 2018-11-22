@@ -23,6 +23,16 @@ module Send
           options[:buffer] = buff
         end
 
+        opt.on('-u', '--username', String, 'Input username') do |user|
+          options[:u] = true
+          options[:user] = user
+        end
+
+        opt.on('--pass', String, 'Input password') do |pass|
+          options[:p] = true
+          options[:pass] = pass
+        end
+
         opt.on('--bs <buffer size>', Integer, 'Buffer size') do |bsize|
           options[:bsize] = bsize
         end
@@ -35,6 +45,7 @@ module Send
       parser.parse!(args)
 
       raise OptionParser::MissingArgument, "No options set, try #{DARK_SHADOW} #{SEND.colorize(:light_yellow)} -h for usage" if options.empty?
+
       options
     end
   end
@@ -51,9 +62,18 @@ module Send
       if @opts[:ip] && @opts[:port] && @opts[:buffer] && @opts[:bsize]
         buff = @opts[:buffer] * @opts[:bsize]
 
-        s = TCPSocket.open(@opts[:ip], @opts[:port])
+        sock_addr = Socket.pack_sockaddr_in(@opts[:port], @opts[:ip])
+        s = Socket.new(:INET, :STREAM, 0) # Create new socket to connect C style
+        s.connect(sock_addr)
 
-        s.send(buff, 0)
+        s.recv(1024)
+        s.send("User #{@opts[:user]}\r\n", 0) if @opts[:u]
+        s.recv(1024)
+        s.send("Password #{@opts[:pass]}\r\n", 0) if @opts[:p]
+        s.recv(1024)
+        s.send("MKD #{buff} \r\n", 0)
+        s.recv(1024)
+        s.send('QUIT\r\n', 0)
         s.close
       else
         warn 'You are missing options for'

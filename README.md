@@ -82,6 +82,18 @@ $ darkshadow send --ip 10.0.0.1 -p 8080 -b AAAA --bs 1024
 
 **Find exploits without entering gdb**
 
+Basic example with EIP overwrite
+
+```bash
+$ export AS=$(ruby -e 'print "A"*1000') # make your life easier
+$ echo $AS
+$ darkshadow exec -l d # overwrite EIP register
+$ darkshadow gdb -i ./stack_over_flow -a 32 -e 'run $AS'
+```
+
+![gdb run reg](https://github.com/EasyIP2023/darkshadow/blob/development/pics/run_reg.png)
+![gdb EIP Overwrite](https://github.com/EasyIP2023/darkshadow/blob/development/pics/peda_example.png)
+
 Basic example
 ```bash
 $ darkshadow gdb -i bash -a 64 -b "main" --rwo '-c "echo cat"' --reg rdi,rsi

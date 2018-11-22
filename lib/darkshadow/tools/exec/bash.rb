@@ -30,8 +30,8 @@ module Bash
 
         opt.on('-l <(e/d) enable/disable ASLR>', String, 'Setting Linux into a vulnerable state by temp disabling ASLR') do |ed|
           options[:vuln]    = true
-          options[:enable]  = ed == 'e' || ed == 'enable' ? true : false
-          options[:disable] = ed == 'd' || ed == 'disable' ? true : false
+          options[:enable]  = %w[e enable].include?(ed) ? true : false
+          options[:disable] = %w[d disable].include?(ed) ? true : false
         end
 
         opt.on_tail('-h', '--help', 'Show this message') do
@@ -43,6 +43,7 @@ module Bash
       parser.parse!(args)
 
       raise OptionParser::MissingArgument, "No options set, try #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} -h for usage" if options.empty?
+
       options
     end
   end
@@ -83,6 +84,6 @@ end
 @driver = Bash::Driver.new
 begin
   @driver.run
-rescue ::Exception => e
+rescue ::StandardError => e
   warn "[x] #{e.class}: #{e.message}"
 end

