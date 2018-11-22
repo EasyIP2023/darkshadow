@@ -88,6 +88,7 @@ Basic example with EIP overwrite
 $ export AS=$(ruby -e 'print "A"*1000') # make your life easier
 $ echo $AS
 $ darkshadow exec -l d # Disable the Address Space Layout Randomization (ASLR)
+$ darkshadow gdb -i ./stack_over_flow -a 32 -e 'start AA'
 $ darkshadow gdb -i ./stack_over_flow -a 32 -e 'run $AS'
 ```
 
