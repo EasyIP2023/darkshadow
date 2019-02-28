@@ -1,24 +1,8 @@
-/.bundle/
-/.yardoc
-/Gemfile.lock
-/_yardoc/
-/coverage/
-/pkg/
+# Ignore all gem files
+pkg/
+
+# Ignore spec reports
 /spec/reports/
-/tmp/
 
 # rspec failure tracking
 .rspec_status
-
-# Ignore Build Script
-build_script
-
-# Ignore all Gems
-*.gem
-
-# Ignore .gdb_history
-.gdb_history
-
-# Ignore peda *
-peda-session-bash.txt
-peda-session-uname.txt

@@ -22,8 +22,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w[lib ext]
   spec.extensions = ['ext/extconf.rb']
 
-  spec.add_development_dependency 'bundler', '~> 1.16'
-  spec.add_development_dependency 'rake', '~> 12.0'
+  spec.add_development_dependency 'bundler', '~> 2'
+  spec.add_development_dependency 'rake', '~> 12'
+  spec.add_development_dependency 'rspec', '~> 3'
 
   spec.add_dependency 'colorize', '~> 0'
   spec.add_dependency 'gdb', '~> 0'
