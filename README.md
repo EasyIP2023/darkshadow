@@ -2,11 +2,12 @@
 
 ![darkshadow](https://i0.wp.com/www.gsalam.net/wp-content/uploads/2015/12/Protection-Against-Magic-and-Evil-1-GSalam.Net_.jpg?resize=777%2C437)
 
-I'm still new to making ruby gems. So please bare with me! :)
+I'm still new to making ruby gems. So please bare with me! :\)
 
 Gem built for simple rapid exploit development using ruby. The gem is meant for those who want to learn about security researching and those whom already are security researchers. To help learn and assist in the exploit development process. It includes tools that I've worked on along with tools from the metasploit framework and other locations on the internet.
 
 Tutorials being used for development
+
 * [FuzzySecurity](http://fuzzysecurity.com)
 * [Corelan.be](https://www.corelan.be/)
 
@@ -19,13 +20,14 @@ gem 'darkshadow'
 ```
 
 And then execute:
-```
+
+```text
 $ bundle
 ```
 
 Or install it yourself as:
 
-```
+```text
 $ gem install darkshadow
 ```
 
@@ -96,6 +98,7 @@ $ darkshadow gdb -i ./stack_over_flow -a 32 -e 'run $AS'
 ![gdb EIP Overwrite](https://github.com/EasyIP2023/darkshadow/blob/development/pics/peda_example.png)
 
 Basic example
+
 ```bash
 $ darkshadow gdb -i bash -a 64 -b "main" --rwo '-c "echo cat"' --reg rdi,rsi
 
@@ -103,7 +106,7 @@ $ darkshadow gdb -i bash -a 64 -b "main" --rwo '-c "echo cat"' --reg rdi,rsi
 $ darkshadow gdb -i bash -a 64 -b 'main' -e 'run','print $rsi'
 ```
 
-![gdb full screen](https://github.com/EasyIP2023/darkshadow/blob/development/pics/gdb_full_screenshot.png)
+![](.gitbook/assets/gdb_full_screenshot.png)
 
 **Packet Sniffer**
 
@@ -118,7 +121,8 @@ $ rvmsudo darkshadow psniff
 ```
 
 Be sure to do one of the following before executing
-```
+
+```text
 Warning: can not check `/etc/sudoers` for `secure_path`, falling back to call via `/usr/bin/env`, this breaks rules from `/etc/sudoers`. Run:
 
     export rvmsudo_secure_path=1
@@ -134,8 +138,9 @@ to avoid the warning, put it in shell initialization file to make it persistent.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/EasyIP2023/darkshadow.
+Bug reports and pull requests are welcome on GitHub at [https://github.com/EasyIP2023/darkshadow](https://github.com/EasyIP2023/darkshadow).
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
