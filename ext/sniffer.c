@@ -1,10 +1,12 @@
-#include <stdio.h> //For standard things
-#include <stdlib.h>    //malloc
-#include <string.h>    //memset
-#include <netinet/ip_icmp.h>   //Provides declarations for icmp header
-#include <netinet/udp.h>   //Provides declarations for udp header
-#include <netinet/tcp.h>   //Provides declarations for tcp header
-#include <netinet/ip.h>    //Provides declarations for ip header
+/* https://www.binarytides.com/packet-sniffer-code-c-linux/ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <netinet/ip_icmp.h>
+#include <netinet/udp.h>
+#include <netinet/tcp.h>
+#include <netinet/ip.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include "darkshadow.h"
