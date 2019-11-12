@@ -1,5 +1,5 @@
 require 'darkshadow/version'
-require 'darkshadow/reap/command_names'
+require 'darkshadow/reap/constants'
 
 module DarkShadow
   class Reap

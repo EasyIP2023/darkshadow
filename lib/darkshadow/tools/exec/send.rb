@@ -1,4 +1,4 @@
-require 'darkshadow/reap/command_names'
+require 'darkshadow/reap/constants'
 require 'optparse'
 require 'socket'
 
@@ -7,7 +7,7 @@ module Send
     def self.parse(args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "Usage: #{DARK_SHADOW} #{SEND.colorize(:light_yellow)} [options]\nExample: #{DARK_SHADOW} #{SEND.colorize(:light_yellow)} --ip 192.168.0.0 -p 8080 -b AAAAAA --bs 920"
+        opt.banner = "Usage: #{DARK_SHADOW} #{log_me(D_WARNING, SEND)} [options]\nExample: #{DARK_SHADOW} #{log_me(D_WARNING, SEND)} --ip 192.168.0.0 -p 8080 -b AAAAAA --bs 920"
         opt.separator ''
         opt.separator 'Options:'
 
@@ -44,7 +44,7 @@ module Send
       end
       parser.parse!(args)
 
-      raise OptionParser::MissingArgument, "No options set, try #{DARK_SHADOW} #{SEND.colorize(:light_yellow)} -h for usage" if options.empty?
+      raise OptionParser::MissingArgument, "No options set, try #{DARK_SHADOW} #{log_me(D_WARNING, SEND)} -h for usage" if options.empty?
 
       options
     end

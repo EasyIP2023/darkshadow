@@ -23,11 +23,10 @@ Gem::Specification.new do |spec|
   spec.extensions = ['ext/extconf.rb']
 
   spec.add_development_dependency 'bundler', '~> 2'
-  spec.add_development_dependency 'rake', '~> 12'
+  spec.add_development_dependency 'rake', '~> 13'
   spec.add_development_dependency 'rspec', '~> 3'
 
-  spec.add_dependency 'colorize', '~> 0'
-  spec.add_dependency 'gdb', '~> 0'
+  spec.add_dependency 'gdb', '~> 1'
   spec.add_dependency 'rex', '~> 2.0'
   spec.add_dependency 'rex-text', '~> 0'
 end

@@ -1,4 +1,4 @@
-require 'darkshadow/reap/command_names'
+require 'darkshadow/reap/constants'
 require 'optparse'
 
 module Bash
@@ -6,7 +6,7 @@ module Bash
     def self.parse(args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "Usage: #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} [options]\nExample: #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} -l d\n\t #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} --sf \"test\\ folder/\""
+        opt.banner = "Usage: #{DARK_SHADOW} #{log_me(D_WARNING, EXEC)} [options]\nExample: #{DARK_SHADOW} #{log_me(D_WARNING, EXEC)} -l d\n\t #{DARK_SHADOW} #{log_me(D_WARNING, EXEC)} --sf \"test\\ folder/\""
         opt.separator ''
         opt.separator 'Options:'
 
@@ -42,7 +42,7 @@ module Bash
 
       parser.parse!(args)
 
-      raise OptionParser::MissingArgument, "No options set, try #{DARK_SHADOW} #{EXEC.colorize(:light_yellow)} -h for usage" if options.empty?
+      raise OptionParser::MissingArgument, "No options set, try #{DARK_SHADOW} #{log_me(D_WARNING, EXEC)} -h for usage" if options.empty?
 
       options
     end

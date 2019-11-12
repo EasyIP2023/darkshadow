@@ -6,3 +6,5 @@ pkg/
 
 # rspec failure tracking
 .rspec_status
+
+.gdb_history

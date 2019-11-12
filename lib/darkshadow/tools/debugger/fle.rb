@@ -1,4 +1,4 @@
-require 'darkshadow/reap/command_names'
+require 'darkshadow/reap/constants'
 require 'darkshadow/reap/gdb_commands'
 require 'optparse'
 require 'gdb'
@@ -8,7 +8,7 @@ module Fle
     def self.parse(args)
       options = {}
       parser = OptionParser.new do |opt|
-        opt.banner = "Usage: #{DARK_SHADOW} #{FLE.colorize(:light_yellow)} [options]\nExample: #{DARK_SHADOW} #{FLE.colorize(:light_yellow)} --init ./vuln_server -a 64 -b 'main' -e 'run','print $rsi'"
+        opt.banner = "Usage: #{DARK_SHADOW} #{log_me(D_WARNING, FLE)} [options]\nExample: #{DARK_SHADOW} #{log_me(D_WARNING, FLE)} --init ./vuln_server -a 64 -b 'main' -e 'run','print $rsi'"
         opt.separator ''
         opt.separator 'Options:'
 
@@ -38,6 +38,11 @@ module Fle
           options[:normal] = true
         end
 
+        opt.on('-l', '--libc-addr <function>', String, 'Get addresses of libc functions') do |libca|
+          options[:libca] = libca
+          options[:libc_addr] = true
+        end
+
         opt.on('--reg <rdi,rsi,rsp>', Array, 'Enter register want to search') do |reg|
           options[:reg] = reg.map(&:to_s)
           options[:regi] = true
@@ -62,7 +67,7 @@ module Fle
       end
       parser.parse!(args)
 
-      raise OptionParser::MissingArgument, "No options set, try #{DARK_SHADOW} #{FLE.colorize(:light_yellow)} -h for usage" if options.empty?
+      raise OptionParser::MissingArgument, "No options set, try #{DARK_SHADOW} #{log_me(D_WARNING, FLE)} -h for usage" if options.empty?
       options
     end
   end
@@ -133,7 +138,7 @@ module Fle
           puts gdb.execute('continue')
         end
       else
-        warn "No options set, try #{DARK_SHADOW} #{FLE.colorize(:light_yellow)} -h for usage"
+        warn "No options set, try #{DARK_SHADOW} #{log_me(D_WARNING, FLE)} -h for usage"
       end
     end
   end
